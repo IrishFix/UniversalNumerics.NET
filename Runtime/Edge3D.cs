@@ -1,19 +1,20 @@
 ﻿using System;
 using UnityEngine;
 
+// ReSharper disable once CheckNamespace
 namespace ComputationalGeometry {
     [Serializable]
-    internal class Edge3D {
+    public class Edge3D {
         [SerializeField] public Vector3[] Vertices;
         
-        internal Vector3 A => Vertices[0];
-        internal Vector3 B => Vertices[1];
+        public Vector3 A => Vertices[0];
+        public Vector3 B => Vertices[1];
 
-        internal Edge3D(Vector3 a, Vector3 b) {
+        public Edge3D(Vector3 a, Vector3 b) {
             Vertices = new[] {a,b};
         }
 
-        internal Edge3D(Edge2D Edge, bool XZLayout, float FillNumber = 0f) {
+        public Edge3D(Edge2D Edge, bool XZLayout, float FillNumber = 0f) {
             Vertices = XZLayout ? new[] {Edge.A.ToVector3XZ(FillNumber),Edge.B.ToVector3XZ(FillNumber)} :
                 new[] {Edge.A.ToVector3XY(FillNumber),Edge.B.ToVector3XY(FillNumber)};
         }

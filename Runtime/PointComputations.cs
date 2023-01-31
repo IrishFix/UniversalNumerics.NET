@@ -4,10 +4,11 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// ReSharper disable once CheckNamespace
 namespace ComputationalGeometry {
-    internal static class PointComputations {
+    public static class PointComputations {
         
-        [Pure] [NotNull] internal static IEnumerable<Vector2> SimplifyPoints(IEnumerable<Vector2> PointCloud, float MinimumP2PDistance) {
+        [Pure] [NotNull] public static IEnumerable<Vector2> SimplifyPoints(IEnumerable<Vector2> PointCloud, float MinimumP2PDistance) {
             List<Vector2> SimplifiedPointCloud = new List<Vector2>();
             List<Vector2> PointsToCull = new List<Vector2>();
             float SqrP2P = MinimumP2PDistance * MinimumP2PDistance;
@@ -27,7 +28,7 @@ namespace ComputationalGeometry {
             return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
         }
 
-        [Pure] [NotNull] internal static IEnumerable<Vector2> ComputeConvexHull(IEnumerable<Vector2> PointCloud) {
+        [Pure] [NotNull] public static IEnumerable<Vector2> ComputeConvexHull(IEnumerable<Vector2> PointCloud) {
             List<Vector2> Points = PointCloud.ToList();
             
             if (Points.Count <= 1) return new List<Vector2>();

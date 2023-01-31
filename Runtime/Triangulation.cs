@@ -4,10 +4,11 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// ReSharper disable once CheckNamespace
 namespace ComputationalGeometry {
-    internal static class Triangulation {
+    public static class Triangulation {
         
-        [Pure, NotNull] internal static IEnumerable<Triangle2D> BowyerWatsonTriangulation(IEnumerable<Vector2> PointCloud) {
+        [Pure, NotNull] public static IEnumerable<Triangle2D> BowyerWatsonTriangulation(IEnumerable<Vector2> PointCloud) {
             List<Triangle2D> Triangulation = new List<Triangle2D>();
 
             Triangle2D SuperTriangle = new Triangle2D(
@@ -72,7 +73,7 @@ namespace ComputationalGeometry {
             return Triangulation;
         }
 
-        [Pure, NotNull] internal static IEnumerable<Edge2D> VoronoiFromTriangulation(IEnumerable<Triangle2D> Triangulation) {
+        [Pure, NotNull] public static IEnumerable<Edge2D> VoronoiFromTriangulation(IEnumerable<Triangle2D> Triangulation) {
             IList<Triangle2D> Tris = Triangulation.AsReadOnlyList();
             List<Edge2D> Edges = new List<Edge2D>();
             foreach (Triangle2D Triangle in Tris) {

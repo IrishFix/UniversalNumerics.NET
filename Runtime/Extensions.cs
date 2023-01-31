@@ -2,8 +2,9 @@
 using System.Linq;
 using UnityEngine;
 
+// ReSharper disable once CheckNamespace
 namespace ComputationalGeometry {
-    internal static class Extensions {
+    public static class Extensions {
         #region Vector3ToVector2
         public static Vector2 ToVector2XZ(this Vector3 Vector) {
             return new Vector2(Vector.x, Vector.z);
