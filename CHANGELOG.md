@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2023-01-31
+
+### Changed
+
+- CHANGELOG.md to include github diffs at page bottom.
+
 ## [0.2.0] - 2023-01-31
 
 ### Removed
@@ -37,3 +43,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Intersection.cs, for detecting intersections / overlaps between listed geometries.
 - PointComputations.cs, to facilitate convex hull computation, point cloud simplification, and continuing on, any solely point-based methods.
 - Conversion.cs, to allow conversion of Vector types.
+
+[unreleased]: https://github.com/IrishFix/Computational-Geometry/compare/v0.2.0...HEAD
+[0.2.1]: https://github.com/IrishFix/Computational-Geometry/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/IrishFix/Computational-Geometry/compare/v0.1.1...v0.2.0
+[0.1.1]: https://github.com/IrishFix/Computational-Geometry/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/IrishFix/Computational-Geometry/releases/tag/v0.1.0
