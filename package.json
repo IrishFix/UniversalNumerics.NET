@@ -1,0 +1,15 @@
+{
+  "name": "com.spiritboundgames.computational-geometry",
+  "displayName": "Computational Geometry",
+  "description": "",
+  "unity": "2021.3",
+  "unityRelease": "17f1",
+  "version": "0.1.0",
+  "keywords": ["Mathematics", "Maths", "Math", "Computation", "Geometry", "Triangulation", "Delaunay"],
+  "license": "GPL-3.0-only",
+  "licensesUrl": "https://spdx.org/licenses/GPL-3.0-only.html",
+  "dependencies": {
+    "com.unity.mathematics": "1.2.6",
+    "com.unity.visualscripting": "1.8.0"
+  }
+}
