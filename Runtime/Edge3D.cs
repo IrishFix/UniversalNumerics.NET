@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ComputationalGeometry {
+namespace ComputationalGeometry.Runtime {
     [Serializable]
     internal class Edge3D {
         [SerializeField] public Vector3[] Vertices;

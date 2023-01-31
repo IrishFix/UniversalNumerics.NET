@@ -4,7 +4,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace ComputationalGeometry {
+namespace ComputationalGeometry.Runtime {
     [Serializable]
     internal class Triangle2D {
         [SerializeField] public Edge2D[] Edges;

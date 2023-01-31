@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
-namespace ComputationalGeometry {
+namespace ComputationalGeometry.Runtime {
     internal static class Conversion {
         [Pure] internal static Vector3 Vector2ToVector3XY(Vector2 Vector) {
             return new Vector3(Vector.x, Vector.y, 0);

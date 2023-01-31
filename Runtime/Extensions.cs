@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace ComputationalGeometry {
+namespace ComputationalGeometry.Runtime {
     internal static class Extensions {
         #region Vector3ToVector2
         public static Vector2 ToVector2XZ(this Vector3 Vector) {

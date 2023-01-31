@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace ComputationalGeometry {
+namespace ComputationalGeometry.Runtime {
     internal static class Triangulation {
         
         [Pure, NotNull] internal static IEnumerable<Triangle2D> BowyerWatsonTriangulation(IEnumerable<Vector2> PointCloud) {

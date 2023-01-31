@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ComputationalGeometry {
+namespace ComputationalGeometry.Runtime {
     [Serializable]
     internal class Triangle3D {
         [SerializeField] public Edge3D[] Edges;

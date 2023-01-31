@@ -1,0 +1,15 @@
+{
+    "name": "IrishFix.ComputationalGeometry",
+    "references": [
+        "Unity.Mathematics",
+        "Unity.VisualScripting.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "noEngineReferences": false
+}
