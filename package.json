@@ -1,7 +1,7 @@
 {
   "name": "com.irishfix.computational-geometry",
   "displayName": "Computational Geometry",
-  "description": "Computational Geometry is a mathematical package oriented on making triangulation, point manipulation, intersection calculation and more, as simple as it can get.",
+  "description": "Computational Geometry is a mathematical package oriented on making triangulation, point manipulation, intersection calculation and more; as simple as possible.",
   "unity": "2021.3",
   "unityRelease": "17f1",
   "version": "0.1.0",
