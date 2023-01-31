@@ -52,7 +52,7 @@ namespace ComputationalGeometry {
         }
         
         public static List<Triangle3D> ToTriangle3DXZ(this IEnumerable<Triangle2D> TriangleList, float YFill = 0f) {
-            return TriangleList.Select(Triangle => new Triangle3D(Triangle, true, YFill)).ToList();
+            return TriangleList.Select(Triangle => Triangle.ToTriangle3DXZ(YFill)).ToList();
         }
         
         public static List<Triangle3D> ToTriangle3DXY(this IEnumerable<Triangle2D> TriangleList, float ZFill = 0f) {
@@ -70,11 +70,11 @@ namespace ComputationalGeometry {
         }
 
         public static List<Triangle2D> ToTriangle2DXZ(this IEnumerable<Triangle3D> TriangleList) {
-            return TriangleList.Select(Triangle => new Triangle2D(Triangle)).ToList();
+            return TriangleList.Select(Triangle => Triangle.ToTriangle2DXZ()).ToList();
         }
         
         public static List<Triangle2D> ToTriangle2DXY(this IEnumerable<Triangle3D> TriangleList) {
-            return TriangleList.Select(Triangle => new Triangle2D(Triangle, false)).ToList();
+            return TriangleList.Select(Triangle => Triangle.ToTriangle2DXY()).ToList();
         }
         #endregion
         
@@ -88,11 +88,11 @@ namespace ComputationalGeometry {
         }
         
         public static List<Edge3D> ToEdge3DXZ(this IEnumerable<Edge2D> EdgeList, float YFill = 0f) {
-            return EdgeList.Select(Edge => new Edge3D(Edge, true, YFill)).ToList();
+            return EdgeList.Select(Edge => Edge.ToEdge3DXZ(YFill)).ToList();
         }
         
         public static List<Edge3D> ToEdge3DXY(this IEnumerable<Edge2D> EdgeList, float ZFill = 0f) {
-            return EdgeList.Select(Edge => new Edge3D(Edge, false, ZFill)).ToList();
+            return EdgeList.Select(Edge => Edge.ToEdge3DXY(ZFill)).ToList();
         }
         #endregion
         
@@ -106,11 +106,11 @@ namespace ComputationalGeometry {
         }
         
         public static List<Edge2D> ToEdge2DXZ(this IEnumerable<Edge3D> EdgeList, float YFill = 0f) {
-            return EdgeList.Select(Edge => new Edge2D(Edge)).ToList();
+            return EdgeList.Select(Edge => Edge.ToEdge2DXZ(YFill)).ToList();
         }
         
         public static List<Edge2D> ToEdge2DXY(this IEnumerable<Edge3D> EdgeList, float ZFill = 0f) {
-            return EdgeList.Select(Edge => new Edge2D(Edge, false)).ToList();
+            return EdgeList.Select(Edge => Edge.ToEdge2DXY(ZFill)).ToList();
         }
         #endregion
     }
