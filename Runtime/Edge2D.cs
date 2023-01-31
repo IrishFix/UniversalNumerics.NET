@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ComputationalGeometry.Runtime {
+namespace ComputationalGeometry {
     [Serializable]
     internal class Edge2D {
         [SerializeField] public Vector2[] Vertices;

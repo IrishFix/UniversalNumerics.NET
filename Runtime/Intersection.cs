@@ -2,7 +2,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace ComputationalGeometry.Runtime {
+namespace ComputationalGeometry {
     internal static class Intersection {
 
         [Pure] internal static bool PointWithinTriangle(Vector2 Point, Triangle2D Triangle) {

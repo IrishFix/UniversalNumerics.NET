@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace ComputationalGeometry.Runtime {
+namespace ComputationalGeometry {
     internal static class PointComputations {
         
         [Pure] [NotNull] internal static IEnumerable<Vector2> SimplifyPoints(IEnumerable<Vector2> PointCloud, float MinimumP2PDistance) {
