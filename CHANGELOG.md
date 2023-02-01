@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.2] - 2023-02-01
+
+### Added
+
+- License notice to the top of all protected cs content(s)
+
+### Changed
+
+- Now using AGPL license instead of GPL
+
 ## [0.3.1] - 2023-02-01
 
 ### Fixed
@@ -62,7 +72,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PointComputations.cs, to facilitate convex hull computation, point cloud simplification, and continuing on, any solely point-based methods.
 - Conversion.cs, to allow conversion of Vector types.
 
-[unreleased]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.1...HEAD
+[unreleased]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.2...HEAD
+[0.3.2]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/IrishFix/Computational-Geometry/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/IrishFix/Computational-Geometry/compare/v0.2.1...v0.2.2

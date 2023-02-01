@@ -4,10 +4,10 @@
   "description": "Computational Geometry is a mathematical package oriented on making triangulation, point manipulation, intersection calculation and more; as simple as possible.",
   "unity": "2021.3",
   "unityRelease": "17f1",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "keywords": ["Mathematics", "Maths", "Math", "Computation", "Geometry", "Triangulation", "Delaunay"],
-  "license": "GPL-3.0-only",
-  "licensesUrl": "https://spdx.org/licenses/GPL-3.0-only.html",
+  "license": "AGPL-3.0-only",
+  "licensesUrl": "https://spdx.org/licenses/AGPL-3.0-only.html",
   "author": {
     "name": "Ben Knight",
     "email": "benjamin.wj.knight@gmail.com"
