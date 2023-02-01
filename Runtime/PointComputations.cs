@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
@@ -7,7 +8,6 @@ using UnityEngine;
 // ReSharper disable once CheckNamespace
 namespace ComputationalGeometry {
     public static class PointComputations {
-        
         [Pure] [NotNull] public static IEnumerable<Vector2> SimplifyPoints(IEnumerable<Vector2> PointCloud, float MinimumP2PDistance) {
             List<Vector2> SimplifiedPointCloud = new List<Vector2>();
             List<Vector2> PointsToCull = new List<Vector2>();
@@ -36,7 +36,7 @@ namespace ComputationalGeometry {
             
             List<Vector2> H = new(new Vector2[2 * n]);
 
-            Points.Sort((a, b) => a.x == b.x ? a.y.CompareTo(b.y) : a.x.CompareTo(b.x));
+            Points.Sort((a, b) => Math.Abs(a.x - b.x) < 0.001f ? a.y.CompareTo(b.y) : a.x.CompareTo(b.x));
             
             for (int i = 0; i < n; ++i) {
                 while (k >= 2 && Cross(H[k - 2], H[k - 1], Points[i]) <= 0)

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2023-02-01
+
+### Added
+
+- Random.cs to handle cases of generating random point clouds and will contain more in the future.
+
 ## [0.2.2] - 2023-02-01
 
 ### Changed
@@ -50,7 +56,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PointComputations.cs, to facilitate convex hull computation, point cloud simplification, and continuing on, any solely point-based methods.
 - Conversion.cs, to allow conversion of Vector types.
 
-[unreleased]: https://github.com/IrishFix/Computational-Geometry/compare/v0.2.2...HEAD
+[unreleased]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/IrishFix/Computational-Geometry/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/IrishFix/Computational-Geometry/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/IrishFix/Computational-Geometry/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/IrishFix/Computational-Geometry/compare/v0.1.1...v0.2.0
