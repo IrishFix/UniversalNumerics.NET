@@ -26,12 +26,12 @@ namespace ComputationalGeometry {
         [SerializeField] public Edge2D[] Edges;
         [SerializeField] public Vector2[] Vertices;
         
-        internal Vector2 A => Vertices[0];
-        internal Vector2 B => Vertices[1];
-        internal Vector2 C => Vertices[2];
+        public Vector2 A => Vertices[0];
+        public Vector2 B => Vertices[1];
+        public Vector2 C => Vertices[2];
 
-        [SerializeField] internal Vector2 Circumcenter;
-        [SerializeField] internal double RadiusSquared;
+        [SerializeField] public Vector2 Circumcenter;
+        [SerializeField] public double RadiusSquared;
  
         public Triangle2D(Vector2 a, Vector2 b, Vector2 c) {
             Vertices = !IsCounterClockwise(a,b,c) ? new[] {a,c,b} : new[] {a,b,c};
@@ -39,8 +39,8 @@ namespace ComputationalGeometry {
             UpdateCircumcircle();
         }
 
-        public Triangle2D(Edge2D a, Edge2D b, Vector2 c) {
-            Vertices = !IsCounterClockwise(a.Vertices[0],b.Vertices[0],c) ? new[] {a.Vertices[0],c,b.Vertices[0]} : new[] {a.Vertices[0],b.Vertices[0],c};
+        public Triangle2D(Edge2D a, Vector2 b) {
+            Vertices = !IsCounterClockwise(a.Vertices[0],a.Vertices[1],b) ? new[] {a.Vertices[0],b,a.Vertices[1]} : new[] {a.Vertices[0],a.Vertices[1],b};
             Edges = new[] {new Edge2D(Vertices[0],Vertices[1]),new Edge2D(Vertices[1],Vertices[2]),new Edge2D(Vertices[2],Vertices[0])};
             UpdateCircumcircle();
         }
@@ -77,20 +77,20 @@ namespace ComputationalGeometry {
             Vector2 p1 = Vertices[1];
             Vector2 p2 = Vertices[2];
             
-            float dA = p0.x * p0.x + p0.y * p0.y;
-            float dB = p1.x * p1.x + p1.y * p1.y;
-            float dC = p2.x * p2.x + p2.y * p2.y;
+            double dA = p0.x * p0.x + p0.y * p0.y;
+            double dB = p1.x * p1.x + p1.y * p1.y;
+            double dC = p2.x * p2.x + p2.y * p2.y;
 
-            float aux1 = dA * (p2.y - p1.y) + dB * (p0.y - p2.y) + dC * (p1.y - p0.y);
-            float aux2 = -(dA * (p2.x - p1.x) + dB * (p0.x - p2.x) + dC * (p1.x - p0.x));
-            float div = 2 * (p0.x * (p2.y - p1.y) + p1.x * (p0.y - p2.y) + p2.x * (p1.y - p0.y));
+            double aux1 = dA * (p2.y - p1.y) + dB * (p0.y - p2.y) + dC * (p1.y - p0.y);
+            double aux2 = -(dA * (p2.x - p1.x) + dB * (p0.x - p2.x) + dC * (p1.x - p0.x));
+            double div = 2 * (p0.x * (p2.y - p1.y) + p1.x * (p0.y - p2.y) + p2.x * (p1.y - p0.y));
 
             if (div == 0) {
                 Debug.LogWarning("Division by 0 caught. UpdateCircumcircle() did not complete.");
                 return;
             }
 
-            Vector2 Center = new(aux1 / div, aux2 / div);
+            Vector2 Center = new((float)(aux1 / div), (float)(aux2 / div));
             
             Circumcenter = Center;
             RadiusSquared = (Center.x - p0.x) * (Center.x - p0.x) + (Center.y - p0.y) * (Center.y - p0.y);
