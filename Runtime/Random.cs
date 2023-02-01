@@ -3,8 +3,8 @@ using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 namespace ComputationalGeometry {
-    public class Random {
-        public IEnumerable<Vector3> SphericalPointCloud(Vector3 Center, int Count, float Radius, float Deviation) {
+    public static class Random {
+        public static IEnumerable<Vector3> SphericalPointCloud(Vector3 Center, int Count, float Radius, float Deviation) {
             List<Vector3> PointCloud = new List<Vector3>();
             float RadiusSquared = Radius * Radius;
             for (int i = 0; i < Count; i++) {
@@ -25,7 +25,7 @@ namespace ComputationalGeometry {
             return PointCloud;
         }
 
-        public IEnumerable<Vector3> CubicalPointCloud(Vector3 Center, int Count, float Radius, float Deviation) {
+        public static IEnumerable<Vector3> CubicalPointCloud(Vector3 Center, int Count, float Radius, float Deviation) {
             List<Vector3> PointCloud = new List<Vector3>();
             for (int i = 0; i < Count; i++) {
                 Vector3 RandomPoint = Center + new Vector3(UnityEngine.Random.Range(-Radius, Radius),
@@ -39,7 +39,7 @@ namespace ComputationalGeometry {
             return PointCloud;
         }
         
-        public IEnumerable<Vector2> CircularPointCloud(Vector2 Center, int Count, float Radius, float Deviation) {
+        public static IEnumerable<Vector2> CircularPointCloud(Vector2 Center, int Count, float Radius, float Deviation) {
             List<Vector2> PointCloud = new List<Vector2>();
             float RadiusSquared = Radius * Radius;
             for (int i = 0; i < Count; i++) {
@@ -58,7 +58,7 @@ namespace ComputationalGeometry {
             return PointCloud;
         }
 
-        public IEnumerable<Vector2> SquarePointCloud(Vector2 Center, int Count, float Radius, float Deviation) {
+        public static IEnumerable<Vector2> SquarePointCloud(Vector2 Center, int Count, float Radius, float Deviation) {
             List<Vector2> PointCloud = new List<Vector2>();
             for (int i = 0; i < Count; i++) {
                 Vector2 RandomPoint = Center + new Vector2(UnityEngine.Random.Range(-Radius, Radius),
