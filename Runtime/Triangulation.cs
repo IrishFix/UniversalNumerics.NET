@@ -1,4 +1,4 @@
-﻿//  Computational Geometry, a package designed to ease the use of geometry-based mathematical functions.
+﻿//  UComputeNet, a package designed to ease the use of mathematical functions.
 //  Copyright © 2023 Ben Knight
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -12,7 +12,6 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program. If not, see https://www.gnu.org/licenses/agpl-3.0.html.
-
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
