@@ -70,6 +70,6 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-/ComputationalGeometry.csproj.meta
-/ComputationalGeometry.sln.DotSettings.user.meta
-/ComputationalGeometry.sln.meta
+/UComputeNet.csproj.meta
+/UComputeNet.sln.DotSettings.user.meta
+/UComputeNet.sln.meta

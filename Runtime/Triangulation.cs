@@ -20,7 +20,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace ComputationalGeometry {
+namespace UComputeNet.Geometry {
     public static class Triangulation {
         
         [Pure, NotNull] public static IEnumerable<Triangle2D> BowyerWatsonTriangulation(IEnumerable<Vector2> PointCloud) {

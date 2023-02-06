@@ -20,7 +20,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace ComputationalGeometry {
+namespace UComputeNet.Geometry {
     [Serializable]
     public class Triangle2D {
         [SerializeField] public Edge2D[] Edges;

@@ -18,7 +18,7 @@ using Unity.Mathematics;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace ComputationalGeometry {
+namespace UComputeNet.Geometry {
     public static class Intersection {
 
         [Pure] public static bool PointWithinTriangle(Vector2 Point, Triangle2D Triangle) {

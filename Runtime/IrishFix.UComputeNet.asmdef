@@ -1,5 +1,5 @@
 {
-    "name": "IrishFix.ComputationalGeometry",
+    "name": "IrishFix.UComputeNet",
     "references": [
         "Unity.Mathematics",
         "Unity.VisualScripting.Core"

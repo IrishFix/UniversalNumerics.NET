@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2023-02-06
+
+### Changed
+
+- Now to be known as "UComputeNet" / "UCompute.net" to allow expansion to further topics and allowing the package to no longer be anchored to specifically geometry. Instead of simply importing ComputationalGeometry for geometry purposes, you now must either import UComputeNet and use ".Geometry", or import UComputeNet.Geometry itself.
+- All NameSpaces, directives, and references to the name "ComputationalGeometry" have henceforth been removed, and the github will soon follow suite.
+
 ## [0.4.0] - 2023-02-06
 
 ### Added
@@ -91,7 +98,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PointComputations.cs, to facilitate convex hull computation, point cloud simplification, and continuing on, any solely point-based methods.
 - Conversion.cs, to allow conversion of Vector types.
 
-[unreleased]: https://github.com/IrishFix/Computational-Geometry/compare/v0.4.0...HEAD
+[unreleased]: https://github.com/IrishFix/Computational-Geometry/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/IrishFix/Computational-Geometry/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.3...v0.4.0
 [0.3.3]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.1...v0.3.2

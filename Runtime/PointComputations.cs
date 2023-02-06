@@ -21,7 +21,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace ComputationalGeometry {
+namespace UComputeNet.Geometry {
     public static class PointComputations {
         [Pure] [NotNull] public static IEnumerable<Vector2> SimplifyPoints(IEnumerable<Vector2> PointCloud, float MinimumP2PDistance) {
             List<Vector2> SimplifiedPointCloud = new List<Vector2>();

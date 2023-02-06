@@ -17,7 +17,7 @@ using System;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace ComputationalGeometry {
+namespace UComputeNet.Geometry {
     [Serializable]
     public class Edge3D {
         [SerializeField] public Vector3[] Vertices;
