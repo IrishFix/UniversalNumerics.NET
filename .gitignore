@@ -73,3 +73,17 @@ crashlytics-build.properties
 /UComputeNet.csproj.meta
 /UComputeNet.sln.DotSettings.user.meta
 /UComputeNet.sln.meta
+
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/projectSettingsUpdater.xml
+/.idea.UComputeNet.iml
+/contentModel.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
