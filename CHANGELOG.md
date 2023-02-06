@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2023-02-06
+
+### Added
+
+- A method in voxelization called "GetSubvoxelEstimate" allowing people to get an estimate (will always be higher than the voxel count to ensure it accounts for the fact that the voxelization may create extra voxels to ensure no details are lost) of the voxels that will be created when running a voxelization call. This allows people to prepare for how many voxels may come out of any number of voxelizations, without having to call them before hand.
+- Voxelization.cs, allowing this package to assist you in creating voxelization of areas! Simply pass in (The center of the area to voxelize, the size of the area to voxelize, the size of the voxels to create) and it will automatically calculate the best way to voxelize that area. (It by default uses a conservative method that ensures it will only ever send you back the same area worth of voxels, or more, never less.)
+- Bowyer-Watson triangulation method that takes a PSG (List of Edges), and therefore automatically culls overlapping points before feeding into the algorithm, allowing edges to be triangulated without fatal bugs and errors.
+
+### Fixed
+
+- Triangle2D failing circumcenter calculation when division can be 0, when it causes less problems than spamming warnings in the output does.
+
 ## [0.3.3] - 2023-02-01
 
 ### Fixed
@@ -79,7 +91,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PointComputations.cs, to facilitate convex hull computation, point cloud simplification, and continuing on, any solely point-based methods.
 - Conversion.cs, to allow conversion of Vector types.
 
-[unreleased]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.3...HEAD
+[unreleased]: https://github.com/IrishFix/Computational-Geometry/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.3...v0.4.0
 [0.3.3]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.0...v0.3.1

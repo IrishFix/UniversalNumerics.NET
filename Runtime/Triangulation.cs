@@ -88,6 +88,24 @@ namespace ComputationalGeometry {
             return Triangulation;
         }
 
+        private static bool PointInList(Vector2 Point, List<Vector2> Points, float Tolerance=0.001f) {
+            float SqrTol = Tolerance * Tolerance;
+            return Points.Any(OtherPoint => (OtherPoint - Point).sqrMagnitude < SqrTol);
+        }
+
+        [Pure, NotNull] public static IEnumerable<Triangle2D> BowyerWatsonTriangulation(IEnumerable<Edge2D> PSG) {
+            List<Vector2> PointCloud = new List<Vector2>();
+            foreach (Edge2D Edge in PSG) {
+                if (!PointInList(Edge.A, PointCloud)) {
+                    PointCloud.Add(Edge.A);
+                }
+                if (!PointInList(Edge.B, PointCloud)) {
+                    PointCloud.Add(Edge.B);
+                }
+            }
+            return BowyerWatsonTriangulation(PointCloud);
+        }
+
         [Pure, NotNull] public static IEnumerable<Edge2D> VoronoiFromTriangulation(IEnumerable<Triangle2D> Triangulation) {
             IList<Triangle2D> Tris = Triangulation.AsReadOnlyList();
             List<Edge2D> Edges = new List<Edge2D>();

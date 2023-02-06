@@ -85,11 +85,6 @@ namespace ComputationalGeometry {
             double aux2 = -(dA * (p2.x - p1.x) + dB * (p0.x - p2.x) + dC * (p1.x - p0.x));
             double div = 2 * (p0.x * (p2.y - p1.y) + p1.x * (p0.y - p2.y) + p2.x * (p1.y - p0.y));
 
-            if (div == 0) {
-                Debug.LogWarning("Division by 0 caught. UpdateCircumcircle() did not complete.");
-                return;
-            }
-
             Vector2 Center = new((float)(aux1 / div), (float)(aux2 / div));
             
             Circumcenter = Center;
