@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2023-02-10
+
+### Changed
+
+- Now to be known as "TensorMath.NET" / "tensormathdotnet"
+
 ## [0.5.0] - 2023-02-06
 
 ### Changed
@@ -98,7 +104,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PointComputations.cs, to facilitate convex hull computation, point cloud simplification, and continuing on, any solely point-based methods.
 - Conversion.cs, to allow conversion of Vector types.
 
-[unreleased]: https://github.com/IrishFix/Computational-Geometry/compare/v0.5.0...HEAD
+[unreleased]: https://github.com/IrishFix/Computational-Geometry/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/IrishFix/Computational-Geometry/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/IrishFix/Computational-Geometry/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.3...v0.4.0
 [0.3.3]: https://github.com/IrishFix/Computational-Geometry/compare/v0.3.2...v0.3.3

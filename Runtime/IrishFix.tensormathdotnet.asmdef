@@ -1,5 +1,5 @@
 {
-    "name": "IrishFix.UComputeNet",
+    "name": "IrishFix.tensormathdotnet",
     "references": [
         "Unity.Mathematics",
         "Unity.VisualScripting.Core"

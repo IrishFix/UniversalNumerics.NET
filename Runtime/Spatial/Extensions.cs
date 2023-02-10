@@ -1,4 +1,4 @@
-﻿//  UComputeNet, a package designed to ease the use of mathematical functions.
+﻿//  TensorMath.NET, a package designed to ease the use of mathematical functions.
 //  Copyright © 2023 Ben Knight
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@ using System.Linq;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace UComputeNet.Geometry {
+namespace tensormathdotnet.Spatial {
     public static class Extensions {
         #region Vector3ToVector2
         public static Vector2 ToVector2XZ(this Vector3 Vector) {

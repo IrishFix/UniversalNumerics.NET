@@ -1,4 +1,4 @@
-﻿//  UComputeNet, a package designed to ease the use of mathematical functions.
+﻿//  TensorMath.NET, a package designed to ease the use of mathematical functions.
 //  Copyright © 2023 Ben Knight
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace UComputeNet.Geometry {
+namespace tensormathdotnet.Spatial {
     [Serializable]
     public class Triangle2D {
         [SerializeField] public Edge2D[] Edges;
