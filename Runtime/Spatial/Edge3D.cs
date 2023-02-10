@@ -17,7 +17,7 @@ using System;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace tensormathdotnet.Spatial {
+namespace TensorMath.Spatial {
     [Serializable]
     public class Edge3D {
         [SerializeField] public Vector3[] Vertices;

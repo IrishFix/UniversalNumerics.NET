@@ -19,7 +19,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace tensormathdotnet.Spatial {
+namespace TensorMath.Spatial {
     public static class Triangulation {
         
         [Pure, NotNull] public static IEnumerable<Triangle2D> BowyerWatsonTriangulation(IEnumerable<Vector2> PointCloud) {

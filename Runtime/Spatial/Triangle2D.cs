@@ -20,7 +20,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace tensormathdotnet.Spatial {
+namespace TensorMath.Spatial {
     [Serializable]
     public class Triangle2D {
         [SerializeField] public Edge2D[] Edges;

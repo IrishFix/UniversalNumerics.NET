@@ -22,7 +22,7 @@ using Unity.Jobs;
 using UnityEngine;
 
 // ReSharper disable once CheckNamespace
-namespace tensormathdotnet.Spatial {
+namespace TensorMath.Spatial {
     public static class Voxelization {
 
         public static int GetSubvoxelEstimate(Vector3 AreaSize, Vector3 VoxelSize) {
