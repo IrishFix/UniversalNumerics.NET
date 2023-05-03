@@ -1,9 +1,6 @@
 {
-    "name": "IrishFix.tensormathdotnet",
-    "references": [
-        "Unity.Mathematics",
-        "Unity.VisualScripting.Core"
-    ],
+    "name": "IrishFix.universalnumbericsdotnet",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
