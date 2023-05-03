@@ -2,7 +2,7 @@
 using UniversalNumerics.Networking;
 
 // ReSharper disable once CheckNamespace
-namespace UniversalNumerics.Networking.initializations {
+namespace UniversalNumerics.Networking.Initializers {
     #region LeCunInitializer
     public class LeCun : IInitializer {
         private double GetRandomNumber(double minimum, double maximum) { 
