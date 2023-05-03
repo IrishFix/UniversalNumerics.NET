@@ -83,3 +83,11 @@ crashlytics-build.properties
 /.idea/.idea.universalnumericsdotnet/.idea/workspace.xml
 /.idea/.idea.universalnumericsdotnet/.idea/.name
 /.idea/.idea.universalnumericsdotnet/.idea/encodings.xml
+/bin/Debug.meta
+/bin/Debug/netstandard2.1.meta
+/bin/Debug/tensormathdotnet.0.7.0.nupkg
+/bin/Debug/tensormathdotnet.0.7.0.nupkg.meta
+/bin/Debug/netstandard2.1/tensormathdotnet.deps.json
+/bin/Debug/netstandard2.1/tensormathdotnet.deps.json.meta
+/bin/Debug/UniversalNumerics.NET.0.7.0.nupkg
+/bin/Debug/UniversalNumerics.NET.0.7.0.nupkg.meta
