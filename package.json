@@ -1,8 +1,8 @@
 {
-  "name": "com.irishfix.tensormathdotnet",
-  "displayName": "TensorMath.NET",
-  "description": "TensorMath.NET is a mathematical package oriented on making triangulation, point manipulation, intersection calculation, artificial intelligence, and more; as simple as possible.",
-  "version": "0.7.0",
+  "name": "com.irishfix.universalnumericsdotnet",
+  "displayName": "UniversalNumerics.NET",
+  "description": "UniversalNumerics.NET is a mathematical package oriented on making triangulation, point manipulation, intersection calculation, artificial intelligence, and more; as simple as possible.",
+  "version": "0.8.0",
   "keywords": ["Mathematics", "Maths", "Math", "Computation", "Geometry", "Triangulation", "Delaunay", "Neural Networking", "Artificial Intelligence"],
   "license": "AGPL-3.0-only",
   "licensesUrl": "https://spdx.org/licenses/AGPL-3.0-only.html",

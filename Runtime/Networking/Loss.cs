@@ -1,7 +1,7 @@
 ﻿
 // ReSharper disable once CheckNamespace
-namespace TensorMath.Networking {
-    public static class loss {
+namespace UniversalNumerics.Networking {
+    public static class Loss {
         
         private static double[] Diff(double[] X, double[] y) {
             double[] Difference = new double[X.Length];

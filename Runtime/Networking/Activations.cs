@@ -1,7 +1,7 @@
 ﻿using System;
 
 // ReSharper disable once CheckNamespace
-namespace TensorMath.Networking.activations {
+namespace UniversalNumerics.Networking.Activations {
     #region LinearActivation
     public class Linear: IActivationFunction {
         public double Activate(double input) {

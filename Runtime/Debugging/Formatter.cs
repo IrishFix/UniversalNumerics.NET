@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 // ReSharper disable once CheckNamespace
-namespace TensorMath.Debugging {
+namespace UniversalNumerics.Debugging {
     public static class Formatter {
         private const string indentString = "    ";
         private static string FormatToExpandedJson(string json) {

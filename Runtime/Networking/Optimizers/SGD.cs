@@ -1,7 +1,7 @@
-﻿using TensorMath.Networking.layers;
+﻿using UniversalNumerics.Networking.Layers;
 
 // ReSharper disable once CheckNamespace
-namespace TensorMath.Networking.optimizers {
+namespace UniversalNumerics.Networking.Optimizers {
     public class SGD : IOptimizer {
         private readonly double LearningRate;
 

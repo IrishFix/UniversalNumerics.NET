@@ -1,4 +1,4 @@
-# TensorMath.NET
+# UniversalNumerics.NET
 #### A .NET package designed with compatability with unity, that will simplify many things, including:
 - Triangulation
 - Voxelization

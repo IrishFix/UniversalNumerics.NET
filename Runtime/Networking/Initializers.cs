@@ -1,8 +1,8 @@
 ﻿using System;
-using tensormathdotnet.Runtime.Networking;
+using UniversalNumerics.Networking;
 
 // ReSharper disable once CheckNamespace
-namespace TensorMath.Networking.initializations {
+namespace UniversalNumerics.Networking.initializations {
     #region LeCunInitializer
     public class LeCun : IInitializer {
         private double GetRandomNumber(double minimum, double maximum) { 

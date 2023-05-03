@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TensorMath.Networking.layers;
+using UniversalNumerics.Networking.Layers;
 
 // ReSharper disable once CheckNamespace
-namespace TensorMath.Networking {
-    public static class genetics {
+namespace UniversalNumerics.Networking {
+    public static class Genetics {
     /*    private class Agent {
             public MLP internalNetwork;
             public double fitness;

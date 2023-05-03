@@ -1,8 +1,8 @@
 ﻿using System;
-using tensormathdotnet.Runtime.Networking;
+using UniversalNumerics.Networking;
 
 // ReSharper disable once CheckNamespace
-namespace TensorMath.Networking {
+namespace UniversalNumerics.Networking {
     public interface IModel {
         public MLP Build(int InputCount);
         public MLP Compile(IInitializer Initializer);

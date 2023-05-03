@@ -1,7 +1,7 @@
-﻿using TensorMath.Networking.layers;
+﻿using UniversalNumerics.Networking.Layers;
 
 // ReSharper disable once CheckNamespace
-namespace TensorMath.Networking {
+namespace UniversalNumerics.Networking {
     public interface IOptimizer {
         void Optimize(Dense layer);
     }

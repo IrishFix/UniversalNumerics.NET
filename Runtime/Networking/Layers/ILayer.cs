@@ -1,5 +1,5 @@
 ﻿// ReSharper disable once CheckNamespace
-namespace TensorMath.Networking {
+namespace UniversalNumerics.Networking {
     public interface ILayer {
         public double[][] Forward(double[][] Batch);
         public double[][] Backward(double[][] Gradients);

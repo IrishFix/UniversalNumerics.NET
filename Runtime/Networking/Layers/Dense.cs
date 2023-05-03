@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TensorMath.Networking.activations;
+using UniversalNumerics.Networking.Activations;
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable once CheckNamespace
-namespace TensorMath.Networking.layers {
+namespace UniversalNumerics.Networking.Layers {
     public class Dense : ILayer {
         public string ClassName = "Dense";
 

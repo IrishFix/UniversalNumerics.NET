@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
-using TensorMath.Networking.layers;
+using UniversalNumerics.Networking.Layers;
 
 // ReSharper disable once CheckNamespace
-namespace TensorMath.Networking.optimizers {
-    public class AdaGrad : IOptimizer {
+namespace UniversalNumerics.Networking.Optimizers {
+    public class RMSprop : IOptimizer {
         private readonly double LearningRate;
+        private readonly double DecayRate;
         private readonly double Epsilon;
         
         private readonly Dictionary<Dense, double[][]> weightsCache = new Dictionary<Dense, double[][]>();
         private readonly Dictionary<Dense, double[]> biasesCache = new Dictionary<Dense, double[]>();
 
-        public AdaGrad(double learningRate=0.01, double epsilon=1e-7) {
+        public RMSprop(double learningRate=0.01, double decayRate=0.95, double epsilon=1e-7) {
             LearningRate = learningRate;
+            DecayRate = decayRate;
             Epsilon = epsilon;
         }
 
@@ -25,20 +27,16 @@ namespace TensorMath.Networking.optimizers {
 
             for (int i = 0; i < layer.OutputCount; i++) {
                 for (int j = 0; j < layer.InputCount; j++) {
-                    weightsCache[layer][i][j] += layer.WeightsGradients[i][j] * layer.WeightsGradients[i][j];
-                    double denom = System.Math.Sqrt(weightsCache[layer][i][j] + Epsilon);
-                    layer.Weights[i][j] -= LearningRate * layer.WeightsGradients[i][j] / (denom+Epsilon);
+                    weightsCache[layer][i][j] = DecayRate * weightsCache[layer][i][j] + (1 - DecayRate) * layer.WeightsGradients[i][j] * layer.WeightsGradients[i][j];
+                    layer.Weights[i][j] -= LearningRate * layer.WeightsGradients[i][j] / (System.Math.Sqrt(weightsCache[layer][i][j]) + Epsilon);
                 }
             }
 
-            if (!biasesCache.ContainsKey(layer)) {
-                biasesCache[layer] = new double[layer.OutputCount];
-            }
+            biasesCache.TryAdd(layer, new double[layer.OutputCount]);
 
             for (int i = 0; i < layer.OutputCount; i++) {
-                biasesCache[layer][i] += layer.BiasesGradients[i] * layer.BiasesGradients[i];
-                double denom = System.Math.Sqrt(biasesCache[layer][i] + Epsilon);
-                layer.Biases[i] -= LearningRate * layer.BiasesGradients[i] / (denom+Epsilon);
+                biasesCache[layer][i] = DecayRate * biasesCache[layer][i] + (1 - DecayRate) * layer.BiasesGradients[i] * layer.BiasesGradients[i];
+                layer.Biases[i] -= LearningRate * layer.BiasesGradients[i] / (System.Math.Sqrt(biasesCache[layer][i]) + Epsilon);
             }
         }
     }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Json;
-using TensorMath.Networking.layers;
-using tensormathdotnet.Runtime.Networking;
+using UniversalNumerics.Networking.Layers;
+using UniversalNumerics.Networking;
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable once CheckNamespace
-namespace TensorMath.Networking {
+namespace UniversalNumerics.Networking {
     public class MLP: IModel {
         public string ClassName = "MLP";
 
@@ -83,10 +83,10 @@ namespace TensorMath.Networking {
                 double epochError = 0;
                 for (int i = 0; i < inputCount; i++) {
                     double[][] output = Forward(X[i]);
-                    double error = loss.MSE(y[i], output);
+                    double error = Loss.MSE(y[i], output);
 
                     epochError += error;
-                    double[][] outputGradient = loss.MSEGradient(output, y[i]);
+                    double[][] outputGradient = Loss.MSEGradient(output, y[i]);
 
                     for (int j = Layers.Length - 1; j >= 0; j--) {
                         outputGradient = Layers[j].Backward(outputGradient);
