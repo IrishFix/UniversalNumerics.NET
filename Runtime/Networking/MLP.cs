@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization.Json;
+using Newtonsoft.Json;
 using UniversalNumerics.Networking.Layers;
-using UniversalNumerics.Networking;
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable once CheckNamespace
@@ -100,7 +99,7 @@ namespace UniversalNumerics.Networking {
         }
 
         public string GetArchitecture() {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

@@ -1,5 +1,6 @@
 {
     "name": "IrishFix.universalnumericsdotnet",
+    "rootNamespace": "UniversalNumerics",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -8,5 +9,5 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "noEngineReferences": false
+    "noEngineReferences": true
 }
