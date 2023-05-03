@@ -13,24 +13,31 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program. If not, see https://www.gnu.org/licenses/agpl-3.0.html.
 
-using JetBrains.Annotations;
-using Unity.Mathematics;
-using UnityEngine;
+using System.Diagnostics.Contracts;
+using System.Numerics;
 
 // ReSharper disable once CheckNamespace
 namespace TensorMath.Spatial {
     public static class Intersection {
 
+        private static float Sign (Vector2 p1, Vector2 p2, Vector2 p3) {
+            return (p1.X - p3.X) * (p2.Y - p3.Y) - (p2.X - p3.X) * (p1.Y - p3.Y);
+        }
+        
         [Pure] public static bool PointWithinTriangle(Vector2 Point, Triangle2D Triangle) {
-            double Area = 0.5 *(-Triangle.B.y*Triangle.C.x + Triangle.A.y*(-Triangle.B.x + Triangle.C.x) + Triangle.A.x*(Triangle.B.y - Triangle.C.y) + Triangle.B.x*Triangle.C.y);
-            double s = 1/(2*Area)*(Triangle.A.y*Triangle.C.y - Triangle.A.x*Triangle.C.y + (Triangle.C.y - Triangle.A.y)*Point.x + (Triangle.A.x - Triangle.C.y)*Point.y);
-            double t = 1/(2*Area)*(Triangle.A.x*Triangle.B.y - Triangle.A.y*Triangle.B.x + (Triangle.A.y - Triangle.B.y)*Point.x + (Triangle.B.x - Triangle.A.x)*Point.y);
-            return s > 0 && t > 0 && 1 - s - t > 0;
+            float d1 = Sign(Point, Triangle.A, Triangle.B);
+            float d2 = Sign(Point, Triangle.B, Triangle.C);
+            float d3 = Sign(Point, Triangle.C, Triangle.A);
+
+            bool has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+            bool has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+
+            return !(has_neg && has_pos);
         }
 
         [Pure] public static Vector2 GetLineIntersection(Vector2 Line1P1, Vector2 Line1P2, Vector2 Line2P1, Vector2 Line2P2) {
-            float X1 = Line1P1.x, X2 = Line1P2.x, X3 = Line2P1.x, X4 = Line2P2.x;
-            float Y1 = Line1P1.y, Y2 = Line1P2.y, Y3 = Line2P1.y, Y4 = Line2P2.y;
+            float X1 = Line1P1.X, X2 = Line1P2.X, X3 = Line2P1.X, X4 = Line2P2.X;
+            float Y1 = Line1P1.Y, Y2 = Line1P2.Y, Y3 = Line2P1.Y, Y4 = Line2P2.Y;
 
             float det = ((X1 - X2) * (Y3 - Y4) - (Y1 - Y2) * (X3 - X4));
             Vector2 P = new Vector2(
@@ -42,15 +49,19 @@ namespace TensorMath.Spatial {
         }
 
         private static float Slope(Vector2 A, Vector2 B) {
-            return (B.y - A.y) / (B.x - A.x);
+            return (B.Y - A.Y) / (B.X - A.X);
+        }
+        
+        private static double RadiansToDegrees(double radians) {
+            return 180 / System.Math.PI * radians;
         }
         
         private static float Angle(float Slope1, float Slope2) {
-            return math.degrees(math.atan((Slope2 - Slope1) / (1 + (Slope2 * Slope1))));
+            return (float)RadiansToDegrees(System.Math.Atan((Slope2 - Slope1) / (1 + (Slope2 * Slope1))));
         }
 
         private static bool CCW(Vector2 A, Vector2 B, Vector2 C) {
-            return (C.y - A.y) * (B.x - A.x) > (B.y - A.y) * (C.x - A.x);
+            return (C.Y - A.Y) * (B.X - A.X) > (B.Y - A.Y) * (C.X - A.X);
         }
 
         [Pure] public static float GetAngleBetween(Vector2 Line1P1, Vector2 Line1P2, Vector2 Line2P1, Vector2 Line2P2) {

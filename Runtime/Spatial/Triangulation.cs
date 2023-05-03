@@ -12,17 +12,18 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program. If not, see https://www.gnu.org/licenses/agpl-3.0.html.
+
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Linq;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
-using UnityEngine;
+using System.Numerics;
 
 // ReSharper disable once CheckNamespace
 namespace TensorMath.Spatial {
     public static class Triangulation {
         
-        [Pure, NotNull] public static IEnumerable<Triangle2D> BowyerWatsonTriangulation(IEnumerable<Vector2> PointCloud) {
+        public static IEnumerable<Triangle2D> BowyerWatsonTriangulation(IEnumerable<Vector2> PointCloud) {
             List<Triangle2D> Triangulation = new List<Triangle2D>();
 
             Triangle2D SuperTriangle = new Triangle2D(
@@ -89,10 +90,20 @@ namespace TensorMath.Spatial {
 
         private static bool PointInList(Vector2 Point, List<Vector2> Points, float Tolerance=0.001f) {
             float SqrTol = Tolerance * Tolerance;
-            return Points.Any(OtherPoint => (OtherPoint - Point).sqrMagnitude < SqrTol);
+            return Points.Any(OtherPoint => Vector2.DistanceSquared(OtherPoint, Point) < SqrTol);
         }
 
-        [Pure, NotNull] public static IEnumerable<Triangle2D> BowyerWatsonTriangulation(IEnumerable<Edge2D> PSG) {
+        [Pure] private static IEnumerable<Vector2> CleanPoints(IEnumerable<Vector2> UncleanPoints) {
+            List<Vector2> CleanedPoints = new List<Vector2>();
+            foreach (Vector2 Point in UncleanPoints) {
+                if (!PointInList(Point, CleanedPoints)) {
+                    CleanedPoints.Add(Point);
+                }
+            }
+            return CleanedPoints;
+        }
+
+        [Pure] public static IEnumerable<Triangle2D> BowyerWatsonTriangulation(IEnumerable<Edge2D> PSG) {
             List<Vector2> PointCloud = new List<Vector2>();
             foreach (Edge2D Edge in PSG) {
                 if (!PointInList(Edge.A, PointCloud)) {
@@ -105,8 +116,8 @@ namespace TensorMath.Spatial {
             return BowyerWatsonTriangulation(PointCloud);
         }
 
-        [Pure, NotNull] public static IEnumerable<Edge2D> VoronoiFromTriangulation(IEnumerable<Triangle2D> Triangulation) {
-            IList<Triangle2D> Tris = Triangulation.AsReadOnlyList();
+        [Pure] public static IEnumerable<Edge2D> VoronoiFromTriangulation(IEnumerable<Triangle2D> Triangulation) {
+            IList<Triangle2D> Tris = Triangulation.ToList();
             List<Edge2D> Edges = new List<Edge2D>();
             foreach (Triangle2D Triangle in Tris) {
                 foreach (Triangle2D OtherTriangle in Tris) {
@@ -121,43 +132,119 @@ namespace TensorMath.Spatial {
             return Edges;
         }
 
-        /*[Pure, NotNull] internal static IEnumerable<Triangle2D> ConstrainedBowyerWatsonTriangulation(IEnumerable<Vector2> PointCloud, IEnumerable<Edge2D> ConstraintEdges, float Threshold = 26) {
-            IList<Vector2> Points = PointCloud.AsReadOnlyList();
-            List<Triangle2D> Triangulation = BowyerWatsonTriangulation(Points).ToList();
-            List<Edge2D> EncroachedSegments = new List<Edge2D>();
-            List<Triangle2D> PoorTriangles = new List<Triangle2D>();
+        [Pure] private static bool IsPoorTriangle(Triangle2D Triangle, float Threshold) {
+            float Angle1 = Intersection.GetAngleBetween(Triangle.A, Triangle.B, Triangle.A, Triangle.C);
+            float Angle2 = Intersection.GetAngleBetween(Triangle.B, Triangle.A, Triangle.B, Triangle.C);
+            float Angle3 = Intersection.GetAngleBetween(Triangle.C, Triangle.A, Triangle.C, Triangle.B);
+            return (Angle1 < Threshold || Angle2 < Threshold || Angle3 < Threshold);
+        }
 
-            List<Vector2> P = PointCloud.ToList();
-
-            foreach (Edge2D Segment in ConstraintEdges) {
+        [Pure] private static IEnumerable<Edge2D> GetEncroachedSegments(IEnumerable<Edge2D> Segments, IEnumerable<Vector2> PointCloud) {
+            List<Edge2D> EncroachedEdges = new List<Edge2D>();
+            foreach (Edge2D Segment in Segments) {
                 bool Encroached = false;
-                foreach (Vector2 Point in Points) {
-                    if (Segment.EncroachedByPoint(Point)) {
-                        Encroached = true;
+                foreach (Vector2 Point in PointCloud) {
+                    Encroached = Segment.EncroachedByPoint(Point);
+                    if (Encroached) {
                         break;
                     }
                 }
-                if (Encroached) EncroachedSegments.Add(Segment);
+                if (Encroached) {
+                    EncroachedEdges.Add(Segment);
+                }
             }
+            return EncroachedEdges;
+        }
 
+        [Pure] public static IEnumerable<Triangle2D> ConstrainedBowyerWatsonTriangulation(IEnumerable<Vector2> PointCloud, IEnumerable<Edge2D> ConstraintEdges, float Threshold = 26) {
+            List<Vector2> PointCloudList = CleanPoints(PointCloud).ToList();
+            List<Edge2D> ConstraintEdgeList = ConstraintEdges.ToList();
+            List<Triangle2D> Triangulation = BowyerWatsonTriangulation(PointCloudList).ToList();
+            List<Edge2D> EncroachedSegments = new List<Edge2D>();
+            List<Triangle2D> PoorTriangles = new List<Triangle2D>();
+
+            foreach (Edge2D ConstraintEdge in ConstraintEdgeList) {
+                
+                if (!PointInList(ConstraintEdge.A, PointCloudList)) {
+                    PointCloudList.Add(ConstraintEdge.A);
+                } 
+                if (!PointInList(ConstraintEdge.B, PointCloudList)) {
+                    PointCloudList.Add(ConstraintEdge.B);
+                }
+
+                foreach (Vector2 Point in PointCloudList) {
+                    if (ConstraintEdge.EncroachedByPoint(Point)) {
+                        EncroachedSegments.Add(ConstraintEdge);
+                        break;
+                    }
+                }
+            }
+            
             foreach (Triangle2D Triangle in Triangulation) {
-                float Angle1 = Intersection.GetAngleBetween(Triangle.A, Triangle.B, Triangle.A, Triangle.C);
-                float Angle2 = Intersection.GetAngleBetween(Triangle.B, Triangle.A, Triangle.B, Triangle.C);
-                float Angle3 = Intersection.GetAngleBetween(Triangle.C, Triangle.A, Triangle.C, Triangle.B);
-
-                if (Angle1 < Threshold || Angle2 < Threshold || Angle3 < Threshold) {
+                if (IsPoorTriangle(Triangle, Threshold)) {
                     PoorTriangles.Add(Triangle);
                 }
             }
 
             while (EncroachedSegments.Count > 0 || PoorTriangles.Count > 0) {
-                if (EncroachedSegments.Count > 0) {
-                    P.Add(EncroachedSegments[0].GetMidpoint());
-                } else if (PoorTriangles.Count > 0) {
-                    
+                List<Edge2D> EdgesToRemove = new List<Edge2D>();
+                List<Triangle2D> TrianglesToRemove = new List<Triangle2D>();
+                
+                foreach (Edge2D EncroachedSegment in EncroachedSegments) {
+                    Vector2 Midpoint = EncroachedSegment.GetMidpoint();
+                    PointCloudList.Add(Midpoint);
+                    EdgesToRemove.Add(EncroachedSegment);
+                    ConstraintEdgeList.Remove(EncroachedSegment);
+                    ConstraintEdgeList.Add(new Edge2D(Midpoint,  EncroachedSegment.A));
+                    ConstraintEdgeList.Add(new Edge2D(Midpoint,  EncroachedSegment.B));
+                }
+
+                foreach (Edge2D EdgeToRemove in EdgesToRemove) {
+                    EncroachedSegments.Remove(EdgeToRemove);
+                }
+
+                foreach (Triangle2D Triangle in PoorTriangles) {
+                    Vector2 Midpoint = Triangle.Circumcenter;
+                    List<Edge2D> SegmentsEncroachedByMidpoint = new List<Edge2D>();
+                    foreach (Edge2D Segment in ConstraintEdgeList) {
+                        if (Segment.EncroachedByPoint(Midpoint)) {
+                            SegmentsEncroachedByMidpoint.Add(Segment);
+                        }
+                    }
+
+                    if (SegmentsEncroachedByMidpoint.Count > 0) {
+                        EncroachedSegments.AddRange(SegmentsEncroachedByMidpoint);
+                    }
+                    else {
+                        PointCloudList.Add(Midpoint);
+                    }
+                    TrianglesToRemove.Add(Triangle);
+                }
+                
+                foreach (Triangle2D TriangleToRemove in TrianglesToRemove) {
+                    PoorTriangles.Remove(TriangleToRemove);
+                }
+
+                Triangulation = BowyerWatsonTriangulation(PointCloudList).ToList();
+                
+                foreach (Edge2D ConstraintEdge in ConstraintEdgeList) {
+                    foreach (Vector2 Point in PointCloudList) {
+                        if (ConstraintEdge.EncroachedByPoint(Point)) {
+                            EncroachedSegments.Add(ConstraintEdge);
+                            break;
+                        }
+                    }
+                }
+                
+                foreach (Triangle2D Triangle in Triangulation) {
+                    if (IsPoorTriangle(Triangle, Threshold)) {
+                        PoorTriangles.Add(Triangle);
+                    }
                 }
             }
-        }*/
+            
+            return Triangulation;
+        }
 
     }
 }

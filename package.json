@@ -1,19 +1,13 @@
 {
   "name": "com.irishfix.tensormathdotnet",
   "displayName": "TensorMath.NET",
-  "description": "TensorMath.NET is a mathematical package oriented on making triangulation, point manipulation, intersection calculation and more; as simple as possible.",
-  "unity": "2021.3",
-  "unityRelease": "17f1",
-  "version": "0.6.0",
-  "keywords": ["Mathematics", "Maths", "Math", "Computation", "Geometry", "Triangulation", "Delaunay"],
+  "description": "TensorMath.NET is a mathematical package oriented on making triangulation, point manipulation, intersection calculation, artificial intelligence, and more; as simple as possible.",
+  "version": "0.7.0",
+  "keywords": ["Mathematics", "Maths", "Math", "Computation", "Geometry", "Triangulation", "Delaunay", "Neural Networking", "Artificial Intelligence"],
   "license": "AGPL-3.0-only",
   "licensesUrl": "https://spdx.org/licenses/AGPL-3.0-only.html",
   "author": {
-    "name": "Ben Knight",
+    "name": "Benjamin Knight",
     "email": "benjamin.wj.knight@gmail.com"
-  },
-  "dependencies": {
-    "com.unity.mathematics": "1.2.6",
-    "com.unity.visualscripting": "1.8.0"
   }
 }

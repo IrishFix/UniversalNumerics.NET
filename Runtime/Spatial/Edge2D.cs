@@ -14,13 +14,13 @@
 //  along with this program. If not, see https://www.gnu.org/licenses/agpl-3.0.html.
 
 using System;
-using UnityEngine;
+using System.Numerics;
 
 // ReSharper disable once CheckNamespace
 namespace TensorMath.Spatial {
     [Serializable]
     public class Edge2D {
-        [SerializeField] public Vector2[] Vertices;
+        public Vector2[] Vertices;
         
         public Vector2 A => Vertices[0];
         public Vector2 B => Vertices[1];
@@ -35,18 +35,22 @@ namespace TensorMath.Spatial {
         }
 
         public float GetLength() {
-            return (A - B).magnitude;
+            return Vector2.Distance(A, B);
         }
 
         public Vector2 GetMidpoint() {
-            return new Vector2((A.x + B.x) / 2, (A.y + B.y) / 2);
+            return new Vector2((A.X + B.X) / 2, (A.Y + B.Y) / 2);
         }
 
-        public bool EncroachedByPoint(Vector2 Point) {
+        public bool EncroachedByPoint(Vector2 Point, float Tolerance = 0.001f) {
+            float SqrTol = Tolerance * Tolerance;
+            if (Vector2.DistanceSquared(A,Point) < SqrTol || Vector2.DistanceSquared(B,Point) < SqrTol) {
+                return false;
+            }
             Vector2 Midpoint = GetMidpoint();
             float Radius = GetLength()/2f;
             float RadiusSquared = Radius * Radius;
-            return (Point.x - Midpoint.x) * (Point.x - Midpoint.x) + (Point.y - Midpoint.y) * (Point.y - Midpoint.y) < RadiusSquared;
+            return (Point.X - Midpoint.X) * (Point.X - Midpoint.X) + (Point.Y - Midpoint.Y) * (Point.Y - Midpoint.Y) < RadiusSquared;
         } 
         
         public override bool Equals(object obj) {
@@ -61,7 +65,7 @@ namespace TensorMath.Spatial {
         }
 
         public override int GetHashCode() {
-            int hCode = (int)A.x ^ (int)A.y ^ (int)B.x ^ (int)B.y;
+            int hCode = (int)A.X ^ (int)A.Y ^ (int)B.X ^ (int)B.Y;
             return hCode.GetHashCode();
         }
     }

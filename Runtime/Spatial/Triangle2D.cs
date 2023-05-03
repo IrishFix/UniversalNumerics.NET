@@ -16,22 +16,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
-using UnityEngine;
+using System.Numerics;
 
 // ReSharper disable once CheckNamespace
 namespace TensorMath.Spatial {
     [Serializable]
     public class Triangle2D {
-        [SerializeField] public Edge2D[] Edges;
-        [SerializeField] public Vector2[] Vertices;
+        public Edge2D[] Edges;
+        public Vector2[] Vertices;
         
         public Vector2 A => Vertices[0];
         public Vector2 B => Vertices[1];
         public Vector2 C => Vertices[2];
 
-        [SerializeField] public Vector2 Circumcenter;
-        [SerializeField] public double RadiusSquared;
+        public Vector2 Circumcenter;
+        public double RadiusSquared;
  
         public Triangle2D(Vector2 a, Vector2 b, Vector2 c) {
             Vertices = !IsCounterClockwise(a,b,c) ? new[] {a,c,b} : new[] {a,b,c};
@@ -65,11 +64,14 @@ namespace TensorMath.Spatial {
         public bool SharesEdgeWith(Triangle2D Triangle) {
             return Edges.Any(Edge => Edge.Equals(Triangle.Edges[0]) || Edge.Equals(Triangle.Edges[1]) || Edge.Equals(Triangle.Edges[2]));
         }
-
-        [CanBeNull]
+        
         public Edge2D SharedEdgeWith(Triangle2D Triangle) {
             List<Edge2D> SharedEdges = Edges.Where(Edge => Edge.Equals(Triangle.Edges[0]) || Edge.Equals(Triangle.Edges[1]) || Edge.Equals(Triangle.Edges[2])).ToList();
             return SharedEdges.Count == 0 ? null : SharedEdges[0];
+        }
+
+        public Vector2 GetMidpoint() {
+            return Vector2.Lerp(Vector2.Lerp(A, C, .5f), B, .5f);
         }
 
         public void UpdateCircumcircle() {
@@ -77,30 +79,30 @@ namespace TensorMath.Spatial {
             Vector2 p1 = Vertices[1];
             Vector2 p2 = Vertices[2];
             
-            double dA = p0.x * p0.x + p0.y * p0.y;
-            double dB = p1.x * p1.x + p1.y * p1.y;
-            double dC = p2.x * p2.x + p2.y * p2.y;
+            double dA = p0.X * p0.X + p0.Y * p0.Y;
+            double dB = p1.X * p1.X + p1.Y * p1.Y;
+            double dC = p2.X * p2.X + p2.Y * p2.Y;
 
-            double aux1 = dA * (p2.y - p1.y) + dB * (p0.y - p2.y) + dC * (p1.y - p0.y);
-            double aux2 = -(dA * (p2.x - p1.x) + dB * (p0.x - p2.x) + dC * (p1.x - p0.x));
-            double div = 2 * (p0.x * (p2.y - p1.y) + p1.x * (p0.y - p2.y) + p2.x * (p1.y - p0.y));
+            double aux1 = dA * (p2.Y - p1.Y) + dB * (p0.Y - p2.Y) + dC * (p1.Y - p0.Y);
+            double aux2 = -(dA * (p2.X - p1.X) + dB * (p0.X - p2.X) + dC * (p1.X - p0.X));
+            double div = 2 * (p0.X * (p2.Y - p1.Y) + p1.X * (p0.Y - p2.Y) + p2.X * (p1.Y - p0.Y));
 
             Vector2 Center = new((float)(aux1 / div), (float)(aux2 / div));
             
             Circumcenter = Center;
-            RadiusSquared = (Center.x - p0.x) * (Center.x - p0.x) + (Center.y - p0.y) * (Center.y - p0.y);
+            RadiusSquared = (Center.X - p0.X) * (Center.X - p0.X) + (Center.Y - p0.Y) * (Center.Y - p0.Y);
         }
         
         private bool IsCounterClockwise() {
-            return (Vertices[1].x - Vertices[0].x) * (Vertices[2].y - Vertices[0].y) - (Vertices[2].x - Vertices[0].x) * (Vertices[1].y - Vertices[0].y) > 0;
+            return (Vertices[1].X - Vertices[0].X) * (Vertices[2].Y - Vertices[0].Y) - (Vertices[2].X - Vertices[0].X) * (Vertices[1].Y - Vertices[0].Y) > 0;
         }
         
         public bool IsCounterClockwise(Vector2 a, Vector2 b, Vector2 c) {
-            return (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y) > 0;
+            return (b.X - a.X) * (c.Y - a.Y) - (c.X - a.X) * (b.Y - a.Y) > 0;
         }
         
         public bool IsPointInsideCircumcircle(Vector2 point) {
-            return (point.x - Circumcenter.x) * (point.x - Circumcenter.x) + (point.y - Circumcenter.y) * (point.y - Circumcenter.y) < RadiusSquared;
+            return (point.X - Circumcenter.X) * (point.X - Circumcenter.X) + (point.Y - Circumcenter.Y) * (point.Y - Circumcenter.Y) < RadiusSquared;
         }
     }
 }

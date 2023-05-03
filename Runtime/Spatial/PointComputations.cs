@@ -13,37 +13,34 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program. If not, see https://www.gnu.org/licenses/agpl-3.0.html.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
-using UnityEngine;
+using System.Numerics;
 
 // ReSharper disable once CheckNamespace
 namespace TensorMath.Spatial {
     public static class PointComputations {
-        [Pure] [NotNull] public static IEnumerable<Vector2> SimplifyPoints(IEnumerable<Vector2> PointCloud, float MinimumP2PDistance) {
+        public static IEnumerable<Vector2> SimplifyPoints(IEnumerable<Vector2> PointCloud, float MinimumP2PDistance) {
             List<Vector2> SimplifiedPointCloud = new List<Vector2>();
             List<Vector2> PointsToCull = new List<Vector2>();
             float SqrP2P = MinimumP2PDistance * MinimumP2PDistance;
-            IEnumerable<Vector2> IEnumerable = PointCloud.AsReadOnlyList();
+            IEnumerable<Vector2> IEnumerable = PointCloud.ToList();
             foreach (Vector2 Point in IEnumerable) {
                 if (PointsToCull.Contains(Point)) continue;
                 SimplifiedPointCloud.Add(Point);
                 foreach (Vector2 OtherPoint in IEnumerable) {
                     if (Point == OtherPoint) continue;
-                    if ((Point - OtherPoint).sqrMagnitude < SqrP2P) PointsToCull.Add(OtherPoint);
+                    if (Vector2.DistanceSquared(Point, OtherPoint) < SqrP2P) PointsToCull.Add(OtherPoint);
                 }
             }
             return SimplifiedPointCloud;
         }
         
         private static double Cross(Vector2 O, Vector2 A, Vector2 B) {
-            return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
+            return (A.X - O.X) * (B.Y - O.Y) - (A.Y - O.Y) * (B.X - O.X);
         }
 
-        [Pure] [NotNull] public static IEnumerable<Vector2> ComputeConvexHull(IEnumerable<Vector2> PointCloud) {
+        public static IEnumerable<Vector2> ComputeConvexHull(IEnumerable<Vector2> PointCloud) {
             List<Vector2> Points = PointCloud.ToList();
             
             if (Points.Count <= 1) return new List<Vector2>();
@@ -51,7 +48,7 @@ namespace TensorMath.Spatial {
             
             List<Vector2> H = new(new Vector2[2 * n]);
 
-            Points.Sort((a, b) => Math.Abs(a.x - b.x) < 0.001f ? a.y.CompareTo(b.y) : a.x.CompareTo(b.x));
+            Points.Sort((a, b) => System.Math.Abs(a.X - b.X) < 0.001f ? a.Y.CompareTo(b.Y) : a.X.CompareTo(b.X));
             
             for (int i = 0; i < n; ++i) {
                 while (k >= 2 && Cross(H[k - 2], H[k - 1], Points[i]) <= 0)

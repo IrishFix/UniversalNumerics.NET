@@ -14,14 +14,14 @@
 //  along with this program. If not, see https://www.gnu.org/licenses/agpl-3.0.html.
 
 using System;
-using UnityEngine;
+using System.Numerics;
 
 // ReSharper disable once CheckNamespace
 namespace TensorMath.Spatial {
     [Serializable]
     public class Triangle3D {
-        [SerializeField] public Edge3D[] Edges;
-        [SerializeField] public Vector3[] Vertices;
+        public Edge3D[] Edges;
+        public Vector3[] Vertices;
         
         public Vector3 A => Vertices[0];
         public Vector3 B => Vertices[1];

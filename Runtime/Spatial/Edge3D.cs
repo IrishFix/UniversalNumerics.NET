@@ -12,15 +12,14 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program. If not, see https://www.gnu.org/licenses/agpl-3.0.html.
-
 using System;
-using UnityEngine;
+using System.Numerics;
 
 // ReSharper disable once CheckNamespace
 namespace TensorMath.Spatial {
     [Serializable]
     public class Edge3D {
-        [SerializeField] public Vector3[] Vertices;
+        public Vector3[] Vertices;
         
         public Vector3 A => Vertices[0];
         public Vector3 B => Vertices[1];
@@ -46,7 +45,7 @@ namespace TensorMath.Spatial {
         }
 
         public override int GetHashCode() {
-            int hCode = (int)A.x ^ (int)A.y ^ (int)A.z ^ (int)B.x ^ (int)B.y ^ (int)B.z;
+            int hCode = (int)A.X ^ (int)A.Y ^ (int)A.Z ^ (int)B.X ^ (int)B.Y ^ (int)B.Z;
             return hCode.GetHashCode();
         }
     }

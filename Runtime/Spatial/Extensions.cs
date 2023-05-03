@@ -15,18 +15,18 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using System.Numerics;
 
 // ReSharper disable once CheckNamespace
 namespace TensorMath.Spatial {
     public static class Extensions {
         #region Vector3ToVector2
         public static Vector2 ToVector2XZ(this Vector3 Vector) {
-            return new Vector2(Vector.x, Vector.z);
+            return new Vector2(Vector.X, Vector.Z);
         }
         
         public static Vector2 ToVector2XY(this Vector3 Vector) {
-            return new Vector2(Vector.x, Vector.y);
+            return new Vector2(Vector.X, Vector.Y);
         }
         
         public static List<Vector2> ToVector2XZ(this IEnumerable<Vector3> VectorList) {
@@ -40,11 +40,11 @@ namespace TensorMath.Spatial {
 
         #region Vector2ToVector3
         public static Vector3 ToVector3XZ(this Vector2 Vector, float YFill = 0f) {
-            return new Vector3(Vector.x, YFill, Vector.y);
+            return new Vector3(Vector.X, YFill, Vector.Y);
         }
         
         public static Vector3 ToVector3XY(this Vector2 Vector, float ZFill = 0f) {
-            return new Vector3(Vector.x, Vector.y, ZFill);
+            return new Vector3(Vector.X, Vector.Y, ZFill);
         }
         
 
