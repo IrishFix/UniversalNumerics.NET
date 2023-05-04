@@ -91,6 +91,7 @@ crashlytics-build.properties
 /bin/Debug/netstandard2.1/tensormathdotnet.deps.json.meta
 /bin/Debug/UniversalNumerics.NET.0.7.0.nupkg
 /bin/Debug/UniversalNumerics.NET.0.7.0.nupkg.meta
+bin
 bin.meta
 obj.meta
 universalnumericsdotnet.sln.DotSettings.user
