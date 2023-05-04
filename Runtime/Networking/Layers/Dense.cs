@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UniversalNumerics.Networking.Activations;
+using UniversalNumerics.Networking.Regularizers;
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable once CheckNamespace
@@ -13,6 +14,7 @@ namespace UniversalNumerics.Networking.Layers {
         public int OutputCount;
 
         public IActivationFunction Activation;
+        public IRegularizer Regularization;
 
         public double[][] Weights;
         public double[] Biases;
@@ -23,10 +25,11 @@ namespace UniversalNumerics.Networking.Layers {
         public double[][] WeightsGradients;
         public double[] BiasesGradients;
 
-        public Dense(int NumNeurons, IActivationFunction ActivationFunc) {
+        public Dense(int NumNeurons, IActivationFunction ActivationFunc, IRegularizer Regularizer=null) {
             InputCount = 0;
             OutputCount = NumNeurons;
             Activation = ActivationFunc;
+            Regularization = Regularizer;
         }
 
         public double[][] Forward(double[][] Batch) {
@@ -49,6 +52,7 @@ namespace UniversalNumerics.Networking.Layers {
 
             Outputs = Activation.BatchActivate(preActivation);;
             Inputs = Batch;
+
             return Outputs;
         }
 

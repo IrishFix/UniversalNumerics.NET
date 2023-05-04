@@ -37,7 +37,7 @@ namespace UniversalNumerics.Networking {
                     }
                 }
 
-                Dense clonedLayer = new Dense(layer.OutputCount, layer.Activation) {
+                Dense clonedLayer = new Dense(layer.OutputCount, layer.Activation, layer.Regularization) {
                     InputCount = layer.InputCount,
                     Weights = clonedWeights,
                     Biases = layer.Biases.ToArray()
@@ -81,6 +81,10 @@ namespace UniversalNumerics.Networking {
             for (int Epoch = 0; Epoch < Epochs; Epoch++) {
                 double epochError = 0;
                 for (int i = 0; i < inputCount; i++) {
+                    foreach (Dense Layer in Layers) {
+                        Layer.Regularization?.Regularize(Layer);
+                    }
+                    
                     double[][] output = Forward(X[i]);
                     double error = Loss.MSE(y[i], output);
 
