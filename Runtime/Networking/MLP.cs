@@ -96,7 +96,7 @@ namespace UniversalNumerics.Networking {
                         Optimizer.Optimize(Layers[j]);
                     }
                 }
-                Console.WriteLine($"Epoch {Epoch + 1}: Total Error = {epochError}");
+                Console.WriteLine($"EPOCH > {Epoch + 1} < ERR > {epochError:0.000000} <");
             }
 
             return this;

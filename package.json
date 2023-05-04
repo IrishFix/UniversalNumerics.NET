@@ -2,7 +2,7 @@
   "name": "com.irishfix.universalnumericsdotnet",
   "displayName": "UniversalNumerics.NET",
   "description": "UniversalNumerics.NET is a mathematical package oriented on making triangulation, point manipulation, intersection calculation, artificial intelligence, and more; as simple as possible.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": ["Mathematics", "Maths", "Math", "Computation", "Geometry", "Triangulation", "Delaunay", "Neural Networking", "Artificial Intelligence"],
   "license": "AGPL-3.0-only",
   "licensesUrl": "https://spdx.org/licenses/AGPL-3.0-only.html",
