@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 1.1.0 - 2023-07-05
+
+### Added
+
+- An untested version of constrained triangulation; along with all Triangle2D / 3D data that was required to be edited to ensure a working format.#
+
+### Changed
+
+- Voxelization now voxelizes spaces using grids instead of lists to ensure connectivity stays consistent.
+
+### Fixed
+
+- Networking/Genetics has now been re-added in an un-tested state. It (should) allow neural networks to be correctly trained using genetic algorithms.
+- Predicted / Expected values were swapped in a MSE calculation during a fit stage in the  neural network training that could case some backwards learning gradients. I was unable to find a case in which it did infact cause said problem, but it is better to ensure it works as expected by using the right method.
+
 ## 1.0.2 - 2023-05-06
 
 ### Changed
@@ -137,7 +152,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PointComputations.cs, to facilitate convex hull computation, point cloud simplification, and continuing on, any solely point-based methods.
 - Conversion.cs, to allow conversion of Vector types.
 
-[unreleased]: https://github.com/IrishFix/UniversalNumerics.NET/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/IrishFix/UniversalNumerics.NET/compare/v1.1.0...HEAD
+[1.0.0]: https://github.com/IrishFix/UniversalNumerics.NET/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/IrishFix/UniversalNumerics.NET/compare/v0.7.0...v1.0.0
 [0.7.0]: https://github.com/IrishFix/UniversalNumerics.NET/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/IrishFix/UniversalNumerics.NET/compare/v0.5.0...v0.6.0

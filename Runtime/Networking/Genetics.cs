@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using UniversalNumerics.Networking.Layers;
 
 // ReSharper disable once CheckNamespace
 namespace UniversalNumerics.Networking {
     public static class Genetics {
-    /*    private class Agent {
+        private class Agent {
             public MLP internalNetwork;
             public double fitness;
 
@@ -24,22 +24,17 @@ namespace UniversalNumerics.Networking {
             return Population;
         }
 
-        private static Agent[] calculateFitness(Agent[] Agents, double[][] X, double[][] y) {
+        private static Agent[] calculateFitness(Agent[] Agents, double[][][] X, double[][][] y) {
             foreach (Agent Agent in Agents) {
                 double MSE = 0;
                 int Count = 0;
                 
                 for (int i = 0; i < y.Length; i++) {
-                    double[] Row = X[i];
-                    double[] Expected = y[i];
-                    double[] Predicted = Agent.internalNetwork.Forward(Row);
+                    double[][] Row = X[i];
+                    double[][] Expected = y[i];
+                    double[][] Predicted = Agent.internalNetwork.Forward(Row);
                     
-                    for (int j = 0; j < Expected.Length; j++) {
-                        double Diff = Expected[j] - Predicted[j];
-                        MSE += Diff * Diff;
-
-                        Count += 1;
-                    }
+                    MSE += Loss.MSE(Predicted, Expected);
                 }
 
                 MSE /= Count;
@@ -51,7 +46,7 @@ namespace UniversalNumerics.Networking {
         }
 
         private static Agent[] naturalSelection(Agent[] Agents) {
-            IList<Agent> Sorted = Agents.OrderBy(Agent => Agent.fitness).AsReadOnlyList();
+            Agent[] Sorted = Agents.OrderBy(Agent => Agent.fitness).ToArray();
             int Cutoff = (int)(0.2 * Agents.Length);
             Agent[] Final = new Agent[Cutoff+1];
 
@@ -80,14 +75,16 @@ namespace UniversalNumerics.Networking {
         private static void fillWeights(MLP Network, double[] Genes) {
             int NextStart = 0;
             foreach (Dense Layer in Network.Layers) {
-                List<double[]> NewWeights = new List<double[]>();
+                double[][] NewWeights = new double[Layer.OutputCount][];
+                
                 for (int i = 0; i < Layer.OutputCount; i++) {
                     double[] NewSubWeights = new double[Layer.InputCount];
+                    
                     for (int j = 0; j < Layer.InputCount; j++) {
                         NewSubWeights[j] = Genes[NextStart++];
                     }
 
-                    NewWeights.Add(NewSubWeights);
+                    NewWeights[i] = NewSubWeights;
                 }
 
                 Layer.Weights = NewWeights;
@@ -146,16 +143,16 @@ namespace UniversalNumerics.Networking {
             return Agents;
         }
 
-        public static MLP train(MLP tempNetwork, double threshhold, int popCount, int genCount, double[][] X, double[][] y) {
-            Agent[] Agents = generatePopulation(popCount, tempNetwork);
-            for (int i = 0; i < genCount; i++) {
+        public static MLP train(MLP templateNetwork, double threshhold, int populationCount, int generationCount, double[][][] X, double[][][] y) {
+            Agent[] Agents = generatePopulation(populationCount, templateNetwork);
+            for (int i = 0; i < generationCount; i++) {
                 Agents = calculateFitness(Agents, X, y);
                 Agents = naturalSelection(Agents);
-                Agents = crossoverAgents(Agents, tempNetwork, popCount);
+                Agents = crossoverAgents(Agents, templateNetwork, populationCount);
                 Agents = mutateAgents(Agents);
                 Agents = calculateFitness(Agents, X, y);
             }
             return Agents[0].internalNetwork;
-        }*/
+        }
     }
 }

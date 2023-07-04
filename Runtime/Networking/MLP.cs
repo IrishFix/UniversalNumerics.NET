@@ -86,7 +86,7 @@ namespace UniversalNumerics.Networking {
                     }
                     
                     double[][] output = Forward(X[i]);
-                    double error = Loss.MSE(y[i], output);
+                    double error = Loss.MSE(output, y[i]); // POSSIBLE PROBLEM
 
                     epochError += error;
                     double[][] outputGradient = Loss.MSEGradient(output, y[i]);
