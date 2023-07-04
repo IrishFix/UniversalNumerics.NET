@@ -28,7 +28,17 @@ namespace UniversalNumerics.Geometrics {
             Edges = new[] {new Edge2D(Vertices[0],Vertices[1]),new Edge2D(Vertices[1],Vertices[2]),new Edge2D(Vertices[2],Vertices[0])};
             UpdateCircumcircle();
         }
-        
+
+        public Triangle2D(Edge2D Edge) {
+            Vertices = new[] { Edge.Vertices[0], Edge.Vertices[1] };
+            Edges = new[] { Edge };
+            
+            double Radius = Edge.GetLength();
+            
+            RadiusSquared = Radius * Radius;
+            Circumcenter = Edge.GetMidpoint();
+        }
+
         public Triangle2D(Triangle3D Triangle, bool FlattenToXZ=true) {
             Vector2 a, b, c; // Projects 3D Triangle to 2D Plane
             if (FlattenToXZ) { // To XZ Plane (If using XZ Plane, Y of 2d vectors will be Z of 3d vectors)

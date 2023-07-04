@@ -1,28 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 // ReSharper disable once CheckNamespace
 namespace UniversalNumerics.Geometrics {
     public static class Voxelization {
+        public static int EstimateVoxelCount(Vector3 areaSize, float voxelSize) {
+            int cellsX = (int)System.Math.Ceiling(areaSize.X / voxelSize);
+            int cellsY = (int)System.Math.Ceiling(areaSize.Y / voxelSize);
+            int cellsZ = (int)System.Math.Ceiling(areaSize.Z / voxelSize);
+            return cellsX * cellsY * cellsZ;
+        }
+        
+        public static Vector3 CalculateVoxelGridSize(Vector3 areaSize, float voxelSize) {
+            Vector3 voxelGridSize = Vector3.Zero;
 
-        public static int GetSubvoxelEstimate(Vector3 AreaSize, Vector3 VoxelSize) {
-            int CellsX = (int)System.Math.Ceiling(AreaSize.X / VoxelSize.X), CellsY = (int)System.Math.Ceiling(AreaSize.Y / VoxelSize.Y), CellsZ = (int)System.Math.Ceiling(AreaSize.Z / VoxelSize.Z);
-            return CellsX * CellsZ * CellsY;
+            voxelGridSize.X = (int)Math.Ceiling(areaSize.X / voxelSize);
+            voxelGridSize.Y = (int)Math.Ceiling(areaSize.Y / voxelSize);
+            voxelGridSize.Z = (int)Math.Ceiling(areaSize.Z / voxelSize);
+
+            return voxelGridSize;
         }
 
-        public static IEnumerable<Vector3> VoxelizeArea(Vector3 Center, Vector3 AreaSize, Vector3 VoxelSize) {
-            Vector3 StartPosition = Center + AreaSize/2 - VoxelSize/2;
-            int CellsX = (int)System.Math.Ceiling(AreaSize.X / VoxelSize.X), CellsY = (int)System.Math.Ceiling(AreaSize.Y / VoxelSize.Y), CellsZ = (int)System.Math.Ceiling(AreaSize.Z / VoxelSize.Z);
-            List<Vector3> Voxels = new(CellsX*CellsY*CellsZ);
-            for (int i = 0; i < CellsX; i++) {
-                for (int j = 0; j < CellsZ; j++) {
-                    for (int k = 0; k < CellsY; k++) {
-                        Vector3 VoxelPosition = StartPosition - new Vector3(VoxelSize.X * i, VoxelSize.Y * k, VoxelSize.Z * j);
-                        Voxels.Add(VoxelPosition);
+        public static Voxel[,,] VoxelizeArea(Vector3 areaCenter, Vector3 areaSize, float voxelSize) {
+            Vector3 voxelGridSize = CalculateVoxelGridSize(areaSize, voxelSize);
+            
+            Voxel[,,] voxelGrid = new Voxel[(int)voxelGridSize.X, (int)voxelGridSize.Y, (int)voxelGridSize.Z];
+
+            for (int x = 0; x < (int)voxelGridSize.X; x++) {
+                for (int y = 0; y < (int)voxelGridSize.Y; y++) {
+                    for (int z = 0; z < (int)voxelGridSize.Z; z++) {
+                        Vector3 voxelPosition = areaCenter + new Vector3(x * voxelSize, y * voxelSize, z * voxelSize);
+                        voxelGrid[x, y, z] = new Voxel(voxelPosition, voxelSize);
                     }
                 }
             }
-            return Voxels;
+
+            return voxelGrid;
         }
         
     }
